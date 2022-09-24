@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<style>
+    table{
+        border-collapse: collapse;
+    }
+    td{
+        border: 1px solid black;
+    }
+</style>
+
+    <form method="post" action="">
+        <h1>Sélectionner l'activité voulu</h1>
+        <table>
+        <tr>
+        <td>Nom Activite</td>
+        <td>Montant</td>
+        <td>Cotision par salaire</td>
+        <td>Cotision par entreprise</td>
+        </tr>
+        {% for activite in activites %}
+            <tr>
+            <td>{{activite.nom}}
+                <select name="activite" id="activite-select">
+                        <option value="non">NON</option>
+                        <option value="oui">OUI</option>
+                </select>
+            </td>
+            <td>{{activite.mantant}}</td>
+            <td>{{activite.cotisationParSalarie}}</td>
+            <td>{{activite.cotisationEntreprise}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </form>
+{% endblock %}

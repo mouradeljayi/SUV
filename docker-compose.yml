@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  db:
+      image: mysql
+      container_name: mysql-suv_norsys_afrique
+      restart: always
+      environment:
+        - MYSQL_DATABASE=${DATABASE_NAME}
+        - MYSQL_USER=${DATABASE_USER}
+        - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+        - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      ports:
+        - "3307:3306"
+      volumes:
+        - db-data:/var/lib/mysql
+      networks:
+        - dev
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin-suv_norsys_afrique
+      restart: always
+      links:
+          - db
+      ports:
+          - 90:80
+      environment:
+          PMA_HOST: db
+      networks:
+          - dev
+  php-apache:
+      build: docker/php
+      container_name: php-apache-suv_norsys_afrique
+      ports:
+        - "98:80"
+      volumes:
+          - ./docker/php/vhosts:/etc/apache2/sites-enabled
+          - ./:/var/www
+      restart: always
+      networks:
+          - dev
+
+networks:
+    dev:
+
+volumes:
+    db-data:

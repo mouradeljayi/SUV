@@ -1,0 +1,18 @@
+.addbutton {
+  float: right;
+  margin-bottom: 2em;
+  margin-top: 1.5em;
+}
+.dataTables_wrapper {
+  overflow: auto;
+  table-layout: fixed;
+}
+.dataTables_filter {
+  margin-bottom: 1em;
+}
+.center_buttons {
+   display: grid;
+   grid-auto-flow: column;
+   grid-gap: 10px;
+ }
+
